@@ -20,6 +20,8 @@
         <script src="https://kit.fontawesome.com/a4b5fc29b1.js" crossorigin="anonymous"></script>
         <!-- Styles -->
         @livewireStyles
+
+        @stack('css')
     </head>
     <body class="font-sans antialiased sm:overflow-auto" 
         :class="{ 'overflow-hidden' : open}"
@@ -41,15 +43,18 @@
 
         <div x-cloak x-show = "open" x-on:click = "open = false" class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30 sm:hidden"></div>
         
+        @stack('modals')
+
+        @livewireScripts
+
+        {{---ALERTA SWEETALERT2--}}
         @if (session('swal')) {{--si esxite esta variable de sesion--}}
             <script>
                 Swal.fire(@json(session('swal'))); //convertir en json y traer la varible swal
             </script>
-            
+        
         @endif
 
-        @stack('modals')
-
-        @livewireScripts
+        @stack('js')
     </body>
 </html>

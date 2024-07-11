@@ -36,7 +36,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('web', 'auth') //auth verifica que estes autenticado, sino te envia a la pagina del login
+            Route::middleware('web', 'auth')
+                ->name('admin.')
+                ->prefix('admin') //auth verifica que estes autenticado, sino te envia a la pagina del login
                 ->group(base_path('routes/admin.php'));
         });
     }

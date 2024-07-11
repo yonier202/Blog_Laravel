@@ -1,14 +1,13 @@
 <?php
-    use Illuminate\Support\Facades\Route;
 
-    Route::get('/admin', function () {
+use App\Http\Controllers\Admin\CategoryController;
+use Illuminate\Support\Facades\Route;
 
-        //variables de session de un unico uso
-        session()->flash('swal',[ 
-            'type' => 'success',
-            'title' => 'Éxito',
-            'text' => 'Has accedido al panel de administración correctamente.'
-        ]);
+    Route::get('/', function () {
 
         return view('admin.dashboard');
-    })->name('admin.dashboard');
+    })->name('dashboard');
+
+    Route::resource('/categories', CategoryController::class)
+        ->names('categories')
+        ->except('show'); //excepto crear metodo show
