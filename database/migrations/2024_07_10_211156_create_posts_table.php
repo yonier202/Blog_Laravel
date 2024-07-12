@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('excerpt')->nullable();
-            $table->mediumText('body');
+            $table->mediumText('body')->nullable();
             $table->string('image_path')->nullable();
             $table->boolean('published')->default(false);
             $table->foreignId('category_id')->constrained();

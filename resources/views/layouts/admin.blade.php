@@ -54,6 +54,7 @@
             </script>
         
         @endif
+        
 
         @stack('js')
     </body>

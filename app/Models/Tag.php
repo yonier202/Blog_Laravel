@@ -9,6 +9,10 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'name',  //activar asignacion masiva atravez del formulario
+    ];
+
     //relacion muchos a muchos polimorfica
     public function posts(){
         return $this->morphedByMany(Post::class, 'taggable');  //Post es la clase que relaciona con la tabla posts y la tabla taggables
