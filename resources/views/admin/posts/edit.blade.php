@@ -86,9 +86,11 @@
             <x-label class="mb-1">
                 Cuerpo
             </x-label>
-            <x-textarea name="body" class="w-full" rows="8">
-                {{old('body', $post->body)}}
-            </x-textarea>
+            <div class="ckeditor">
+                <x-textarea id="editor" name="body" class="w-full" rows="8">
+                    {{old('body', $post->body)}}
+                </x-textarea>
+            </div>
         </div>
 
         <div class="mb-4">
@@ -176,6 +178,32 @@
                     }
                 });
             });
+
+        // // Inicializar CKEditor en los elementos que tengan el ID 'editor'
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     const editors = document.querySelectorAll('#editor',{
+
+        //         simpleUpload: {
+        //             // The URL that the images are uploaded to.
+        //             uploadUrl: "{{route('images.upload')}}",
+
+        //             // Enable the XMLHttpRequest.withCredentials property.
+        //             withCredentials: true,
+
+        //             // Headers sent along with the XMLHttpRequest to the upload server.
+        //             headers: {
+        //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        //             }
+        //         }
+        //     });
+            // editors.forEach((editor) => {
+                ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+            // });
+        // });   
         </script>
         
 
@@ -186,5 +214,6 @@
                 eliminarPost.submit();
             }
         </script>
+     
     @endpush
 </x-admin-layout>

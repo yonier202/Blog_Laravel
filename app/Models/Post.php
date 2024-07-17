@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -18,6 +19,7 @@ class Post extends Model
         'excerpt',
         'body',
         'published',
+        'image_path'
     ];
 
     protected function title():Attribute
@@ -25,14 +27,29 @@ class Post extends Model
         return new Attribute(
             
             set: fn($value) => strtolower($value), //mutadores cambian la manera almacenar un dato en la bd(en esta caso lo convierte a minuscula)
-            get: fn($value) => ucfirst($value) //accesor recuperan un dato y lo transforman
+            get: fn($value) => ucfirst($value) //accesores recuperan un dato y lo transforman
         );
     }
 
     protected function image(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->attributes['image_path'] ?? 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'
+            // get: fn() => $this->attributes['image_path'] ?? 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'
+            get: function(){
+                if ($this->image_path) {
+                    if (substr($this->image_path, 0, 8)== 'https://') {
+                        //verificar si la url empieza con https://
+                        return $this->image_path; //lo trae como esta en el bd
+                    }
+
+                return Storage::url($this->image_path); //le concatena al inicio http://proyecto_blog.test/public/storage
+                    
+                }else{      
+                    //retornar imagen(No imagen)
+                    return 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg';
+                }
+                
+            }
         );
     }
 
