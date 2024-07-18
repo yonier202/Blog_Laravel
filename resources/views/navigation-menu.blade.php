@@ -68,8 +68,8 @@
                                     <div class="block px-4 py-2 text-xs text-gray-400">
                                         {{ __('Manage Account') }}
                                     </div>
-                                @can('admin') {{--gate admin es true se muestra el enlance--}}
-                                
+                                @can('admin') {{--gate, si admin es true se muestra el enlance--}}
+
                                     <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                         Administrador
                                     </x-dropdown-link>

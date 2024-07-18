@@ -37,7 +37,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             //middleware protege la ruta y redirige, gate muestra error 403
-            Route::middleware('web', 'auth', /*'is_admin'*/ 'can:admin') //
+            Route::middleware('web', 'auth', /*'is_admin'*/ /*'can:admin' */) //
                 ->name('admin.')
                 ->prefix('admin') //auth verifica que estes autenticado, sino te envia a la pagina del login
                 ->group(base_path('routes/admin.php'));

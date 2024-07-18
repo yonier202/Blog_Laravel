@@ -18,7 +18,25 @@
             'url' => route('admin.posts.index'),
             'active' => request()->routeIs('admin.posts.*'),
             'icon' => 'fa-solid fa-blog',
-         ]
+         ],
+         [
+            'name' => 'Roles',
+            'url' => route('admin.roles.index'),
+            'active' => request()->routeIs('admin.roles.*'),
+            'icon' => 'fa-solid fa-user-tag',
+         ],
+         [
+            'name' => 'Permisos',
+            'url' => route('admin.permissions.index'),
+            'active' => request()->routeIs('admin.permissions.*'),
+            'icon' => 'fa-solid fa-lock',
+         ],
+         [
+            'name' => 'Usuarios',
+            'url' => route('admin.users.index'),
+            'active' => request()->routeIs('admin.users.*'),
+            'icon' => 'fa-solid fa-users',
+         ],
         
     ];
 

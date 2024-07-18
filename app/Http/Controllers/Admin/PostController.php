@@ -69,10 +69,11 @@ class PostController extends Controller
     public function edit(Post $post)
     {   
         // if (!Gate::allows('author', $post)) {
-        //     abort(403);
+        //     abort(403 , 'No tienes acceso PUTO');
         // }
 
-        $this->authorize('author', $post);
+        $this->authorize('author', $post); //AUTHORIZE LLAMA EL Gate y valida
+
         // $tags= Tag::all();
         $categories = Category::all();  
         return view('admin.posts.edit', compact('post', 'categories'));
