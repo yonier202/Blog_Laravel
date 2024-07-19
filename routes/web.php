@@ -4,6 +4,8 @@ use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +18,7 @@ use App\Http\Controllers\ImageController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', WelcomeController::class)->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -32,7 +32,10 @@ Route::middleware([
 Route::post('images/upload', [ImageController::class, 'upload'])
     ->name('images.upload');
 
-Route::get('prueba', function () {
+Route::get('posts/{post}', [PostController::class, 'show'])
+    ->name('posts.show');  
+
+// Route::get('prueba', function () {
 
     // $path = 'posts/i9coIQN3eUjQTb1XVVDFnn5I29HGBrmMGlECg8MR.png';
 
@@ -161,7 +164,7 @@ Route::get('prueba', function () {
 
     ///////////////////////////////////////////////////////////
     //DESCARGAR IMAGEN
-    return Storage::download('posts/VERDE SOLO HAY UNO.jpeg'); //descargar imagen
+//     return Storage::download('posts/VERDE SOLO HAY UNO.jpeg'); //descargar imagen
 
 
-});
+// });

@@ -1,4 +1,17 @@
-<x-admin-layout>
+<x-admin-layout :breadcrumb="[
+    [
+        'name' => 'Home',
+        'url' => route('admin.dashboard')
+
+    ],
+    [
+        'name' => 'Permisos',
+        'url' => route('admin.roles.index')
+    ],
+    [
+        'name' => $role->name
+    ]
+]">
     <div class="bg-white shadow rounded-lg p-6">
         <form action="{{route('admin.roles.update', $role)}}" method="POST">
             @csrf

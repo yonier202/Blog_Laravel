@@ -1,4 +1,17 @@
-<x-admin-layout>
+<x-admin-layout :breadcrumb="[
+    [
+        'name' => 'Home',
+        'url' => route('admin.dashboard')
+
+    ],
+    [
+        'name' => 'Permisos',
+        'url' => route('admin.posts.index')
+    ],
+    [
+        'name' => $post->slug
+    ]
+]">
     
     @push('css')
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

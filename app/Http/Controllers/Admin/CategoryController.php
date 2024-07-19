@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['can:Gestión de categorías']) //(permiso) proteger desde el controlador
+            /* ->only('index', 'create', 'store')*/;
+    }
     /**
      * Display a listing of the resource.
      */

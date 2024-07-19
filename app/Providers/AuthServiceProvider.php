@@ -29,5 +29,10 @@ class AuthServiceProvider extends ServiceProvider
         // Gate::define('author', function($user, $post){
         //     return $user->id === $post->user_id; //retorna true o false
         // });
+        //---------------------------------------
+        //ASIGNAR ROL DE SUPER ADMIN
+        Gate::after(function ($user, $ability) {
+            return $user->hasRole('SuperAdmin'); // note this returns boolean
+         });
     }
 }

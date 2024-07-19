@@ -22,6 +22,12 @@ class Post extends Model
         'image_path'
     ];
 
+    //transformar un elemeto a un tipado especifico
+    protected $casts = [
+        'published' => 'boolean', 
+        'published_at' => 'datetime',
+    ];
+
     protected function title():Attribute
     {
         return new Attribute(
@@ -71,6 +77,11 @@ class Post extends Model
     //relacion uno a muchos polimorfica
     public function comments(){
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    //Route Model binding
+    public function getRouteKeyName(){
+       return 'slug';
     }
     
 }
