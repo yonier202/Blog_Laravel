@@ -72,7 +72,7 @@ class PostController extends Controller
         //     abort(403 , 'No tienes acceso PUTO');
         // }
 
-        $this->authorize('author', $post); //AUTHORIZE LLAMA EL Gate y valida
+        $this->authorize('author', $post); //AUTHORIZE LLAMA EL Gate y validar que solo se puedan editar los post asociados a el usuario
 
         // $tags= Tag::all();
         $categories = Category::all();  

@@ -6,9 +6,9 @@
             'active' => request()->routeIs('dashboard')
         ],
         [
-            'name' => 'Articulos',
-            'url' => route('dashboard'),
-            'active' => false
+            'name' => 'Contacto',
+            'url' => route('contacts.index'),
+            'active' => request()->routeIs('contacts.index')
         ]
     ];
 @endphp

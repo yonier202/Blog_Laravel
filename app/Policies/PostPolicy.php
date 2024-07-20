@@ -10,6 +10,6 @@ class PostPolicy
     public function author(User $user, Post $post): bool
     {
         return $user->id === $post->user_id; //retorna true o false
-
+        //validar que solo se puedan editar los post asociados a el usuario
     }
 }

@@ -83,5 +83,30 @@ class Post extends Model
     public function getRouteKeyName(){
        return 'slug';
     }
+    //QUERY SCOPE LOCALES CUANDO LLAMO filter() en el controlador
+    public function scopeFilter($query){ //filtro por categorias
+        $query->when(request('categories'), function($query){
+            $query->whereIn('category_id', request('categories'));
+        })
+        ->when(request('order') ?? 'new', function($query, $order){ //filtro por orden
+            $sort = $order === "new" ? 'desc' : 'asc';
+            $query->orderBy('published_at', $sort);
+        })
+        ->when(request('tag') ?? null, function($query){ //filtro por tags
+            $query->whereHas('tags', function($query){
+                $query->where('tags.name', request('tag'));
+            });
+        });
+    }
+    //SCOPE GLOBAL PARA VALIDACION (SOLO MANIPULAR POST CON EL ID DE USUARIO ASOCIADO)
+    // protected static function booted()
+    // {
+    //     static::addGlobalScope('written', function($query){
+    //         if (request()->routeIs('admin.*')) {
+    //             $query->where('user_id', auth()->id());
+    //         }
+            
+    //     });
+    // }
     
 }
