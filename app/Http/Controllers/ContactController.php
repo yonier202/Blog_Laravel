@@ -23,6 +23,12 @@ class ContactController extends Controller
         Mail::to('yonier202@gmail.com')
         ->send(new ContactMailable($request->all()));
 
-        return "Mensaje enviado";
+        session()->flash('swal', [
+            'icon' =>'success',
+            'title' => 'Éxito',
+            'text' => 'Post enviado correctamente.'
+        ]);
+
+        return back();
     }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,4 +14,16 @@
     <p>Asunto: {{$data['message']}}</p>
 
 </body>
-</html>
+</html> --}}
+
+@component('mail::message')
+# Hola Jhonier Rojas
+{{$data['name']}} te ha enviado un mensaje desde la web Laravel.
+
+@component('mail::panel')
+{{$data['message']}}
+@endcomponent
+
+Correo de contacto {{$data['email']}}
+
+@endcomponent

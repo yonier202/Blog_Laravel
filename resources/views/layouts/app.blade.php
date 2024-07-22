@@ -14,6 +14,8 @@
         <script src="https://kit.fontawesome.com/a4b5fc29b1.js" crossorigin="anonymous"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{--sweetalert2--}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- Styles -->
         @livewireStyles
@@ -39,8 +41,13 @@
             </main>
         </div>
 
-        @stack('modals')
 
-        @livewireScripts
+        @if (session('swal')) {{--si esxite esta variable de sesion--}}
+        <script>
+                Swal.fire(@json(session('swal'))); //convertir en json y traer la varible swal
+        </script>
+            
+        @endif
+
     </body>
 </html>

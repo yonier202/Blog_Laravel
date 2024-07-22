@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ContactMailable extends Mailable
+class ContactMailable extends Mailable implements ShouldQueue  // implements ShouldQueue para ejecutar con colas
 {
     use Queueable, SerializesModels;
 
@@ -30,7 +30,7 @@ class ContactMailable extends Mailable
     public function envelope(): Envelope
 {
     return new Envelope(
-        from: new Address('yonier202@gmail.com', 'Jhonier DEV'),
+        from: new Address($this->data['email'], 'Jhonier DEV'),
         subject: 'Correo de contacto',
     );
 }
