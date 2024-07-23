@@ -14,14 +14,18 @@ class ContactController extends Controller
 
     public function store(Request $request){
 
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'message' => 'required',
         ]);
 
+        if ($request->hasFile('file')) { //verifica si hay adjunto un archivo
+            $data['file'] = $request->file->store('contact'); //almecena en el directori contact y devuelve su ruta
+        }
+        
         Mail::to('yonier202@gmail.com')
-        ->send(new ContactMailable($request->all()));
+        ->send(new ContactMailable($data));
 
         session()->flash('swal', [
             'icon' =>'success',

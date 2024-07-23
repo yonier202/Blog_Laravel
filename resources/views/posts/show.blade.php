@@ -20,9 +20,12 @@
             <img src="{{$post->image}}" alt="{{$post->title}}" class="w-full aspect-[16/9] object-cover object-center">
         </figure>
 
-        <div>
+        <div class="mb-16">
             {!!$post->body!!} {{--Aqui viene una etiqueta <p> para escaparla y que sea aplique(usar=({!!$variable!!}))--}}
         </div>
 
+        <div>
+            @livewire('question', ['model' => $post])
+        </div>
     </section>
 </x-app-layout>

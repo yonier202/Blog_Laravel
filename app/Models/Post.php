@@ -79,6 +79,11 @@ class Post extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    //relacion uno a muchos polimorfica
+    public function questions(){
+        return $this->morphMany(Question::class, 'questionable');
+    }
+
     //Route Model binding
     public function getRouteKeyName(){
        return 'slug';

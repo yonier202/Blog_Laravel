@@ -49,5 +49,7 @@
             
         @endif
 
+        @livewireScripts
+
     </body>
 </html>
