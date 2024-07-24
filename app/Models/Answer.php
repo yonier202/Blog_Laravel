@@ -9,6 +9,11 @@ class Answer extends Model
 {
     use HasFactory;
 
+    protected $fillable =[
+        'body',  //activar asignacion masiva atravez del formulario
+        'user_id',
+    ];
+
     // relacion 1 a muchos inversa
     public function user(){
         return $this->belongsTo(User::class);

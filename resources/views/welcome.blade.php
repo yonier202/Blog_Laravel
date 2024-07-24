@@ -1,8 +1,8 @@
 <x-app-layout>
     <figure class="mb-12">
-        <img src="{{asset('img/home/economia.jpg')}}"
+        <img src="{{asset('img/home/economia.jpeg')}}"
         alt="Portada Home"
-        class="w-full aspect-[3/1] object-cover object-center">
+        class="w-full aspect-[13/5] object-cover object-center">
     </figure>
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <h1 class="text-3xl text-center font-semibold mb-6">
