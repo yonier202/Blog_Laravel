@@ -5,10 +5,16 @@
     </button>
 
     @if ($answer_created['open'])
-    <div class="flex">
-        <figure class="mr-4">
-            <img src="{{$question->user->profile_photo_url}}" alt="" class="w-12 h-12 object-cover object-center rounded-full">
-        </figure>
+    <div class="flex ">
+        @auth
+            <figure class="mr-2">
+                <img class="w-12 h-12 object-cover object-center rounded-full"  src="{{auth()->user()->profile_photo_url}}" alt="">
+            </figure>
+        @else
+            <figure>
+                <img class="w-12 h-12 object-cover object-center rounded-full"  src="{{asset('img/home/user/user_no_login.jpg')}}">
+            </figure>
+        @endauth
 
         <form class="flex-1" wire:submit.prevent="store()">
             <textarea placeholder="Escriba su respuesta" wire:model="answer_created.body"

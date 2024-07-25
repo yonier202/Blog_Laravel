@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\CommentCreated;
 use Livewire\Component;
 use App\Models\Question as ModelQuestion;
 
@@ -28,17 +29,23 @@ class Question extends Component
     public function store(){
         // dd('se procesara el formulario');
 
-        $this->validate([
-           'message' => ['required'],
-        ]);
-        $this->model->questions()->create([ //guardar en la bd atrvez de la relacion
-            'body' => $this->message,
-            'user_id' => auth()->id(),
-        ]);
-
-        // $this->getQuestions(); //cargar las preguntas al montar el componente
-         
-        $this->message = ''; //retornar a vacio
+        if (auth()->id()) { //validar si esta autenticado
+            $this->validate([
+                'message' => ['required'],
+             ]);
+             $question = $this->model->questions()->create([ //guardar en la bd atrvez de la relacion
+                 'body' => $this->message,
+                 'user_id' => auth()->id(),
+             ]);
+     
+             // $this->getQuestions(); //cargar las preguntas al montar el componente
+              
+             $this->message = ''; //retornar a vacio
+     
+             CommentCreated::dispatch($question); //disparar evento
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     // public function getQuestions(){

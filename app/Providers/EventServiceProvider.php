@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CommentCreated;
+use App\Listeners\NotifyAuthor;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +20,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CommentCreated::class => [ //cuando se ejecute este evento se ejecute el oyente NotifyAuthor
+            NotifyAuthor::class
+        ]
+        // php artisan event:generate
+        // CommentCreated::class => [ //cuando se ejecute este evento se ejecute el oyente NotifyAuthor
+        //     NotifyAuthor::class
+        // ]
     ];
 
     /**

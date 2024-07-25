@@ -43,6 +43,9 @@ class Answer extends Component
     }
 
     public function store(){
+        if (!auth()->id()) {
+            return redirect()->route('login');
+        }
         $this->validate([
             'answer_created.body' => 'required'
         ]);

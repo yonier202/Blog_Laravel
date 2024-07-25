@@ -9,6 +9,11 @@
             'name' => 'Contacto',
             'url' => route('contacts.index'),
             'active' => request()->routeIs('contacts.index')
+        ],
+        [
+            'name' => 'Posts',
+            'url' => route('home'),
+            'active' => request()->routeIs('home')
         ]
     ];
 @endphp

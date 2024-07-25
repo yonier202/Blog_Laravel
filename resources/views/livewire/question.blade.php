@@ -1,14 +1,23 @@
+
 <div>
     {{-- @dump($model) --}}
    <div class="flex">
-        <figure>
-            <img class="w-12 h-12 object-cover object-center rounded-full"  src="{{auth()->user()->profile_photo_url}}" alt="">
-        </figure>
+        @auth
+            <figure>
+                <img class="w-12 h-12 object-cover object-center rounded-full"  src="{{auth()->user()->profile_photo_url}}" alt="">
+            </figure>
+        @else
+            <figure>
+                <img class="w-12 h-12 object-cover object-center rounded-full"  src="{{asset('img/home/user/user_no_login.jpg')}}">
+            </figure>
+        @endauth
+        
         <div class="ml-4 flex-1">
             <form wire:submit.prevent="store"> {{--escuchar el evento submit(ejecutar store)--}} 
                 <textarea wire:model.defer="message" {{--pasar el valor en message--}}
                 placeholder="Escribe tu mensaje" rows="3" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
                 
+
                 <x-input-error for="message" class="mt-1" />
 
                 <div class="flex justify-end">
@@ -29,9 +38,9 @@
         @foreach ($this->questions as $question)
             <li wire:key="question-{{$question->id}}"> {{--agregar llaves identificativas--}}
                 <div class="flex">
-                    <figure class="mr-4">
-                        <img src="{{$question->user->profile_photo_url}}" alt="" class="w-12 h-12 object-cover object-center rounded-full">
-                    </figure>
+                        <figure class="mr-4">
+                            <img src="{{$question->user->profile_photo_url}}" alt="" class="w-12 h-12 object-cover object-center rounded-full">
+                        </figure>
                     <div class="flex-1">
                         <p class="font-semibold">
                             {{$question->user->name}}
@@ -92,4 +101,14 @@
         </div>
     @endif
     {{-- @dump($question_edit)--}}
+    {{-- @push('js')
+        <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/balloon/ckeditor.js"></script>
+        <script>
+            BalloonEditor
+               .create(document.querySelector('#editor'))
+               .catch(error => {
+                    console.error( error );
+                });
+        </script>
+    @endpush --}}
 </div>
